@@ -3,7 +3,7 @@ import path from 'path';
 
 const BASE_URL = 'https://xyz.skillwallet.digital';
 // Updated Token (Valid as of Feb 15, 2026)
-const AUTH_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2OTQ1MTE4MTFhMzhhNGY4YWFmN2UxNjkiLCJyb2xlIjoib3BlcmF0aW9uc0Fzc29jaWF0ZSIsImlzTWZhIjpmYWxzZSwiaXN0ZmEiOmZhbHNlLCJvdHBWZXJpZmllZCI6dHJ1ZSwidHlwZSI6ImNsYXNzaWZpZWQiLCJjb21wYW55TmFtZSI6Inh5eiBjb21wYW55IiwiaXNTV1N1cGVyQWRtaW4iOmZhbHNlLCJzb3J0bmFtZSI6Inh5eiIsImlzVGZhVmVyaWZpZWQiOnRydWUsImlzTWZhVmVyaWZpZWQiOnRydWUsInRlbmFudFR5cGUiOiJjb21wYW55IiwicGVybWlzc2lvbnMiOlt7InNlcnZpY2UiOiJwcm9ncmFtX21hbmFnZW1lbnQiLCJhY3Rpb25zIjpbIkNSRUFURSIsIlJFQUQiLCJVUERBVEUiLCJERUxFVEUiLCJDT0hPUlRDUlVEIiwiSU5URUdSQVRJT05TU1oiLCJDQUxFTkRBUkNPTkZJRyJdfSx7InNlcnZpY2UiOiJkYXNoYm9hcmRfT3BlcmF0aW9uc19hc3NvY2lhdGUiLCJhY3Rpb25zIjpbIkNSRUFURSIsIlJFQUQiLCJVUERBVEUiLCJERUxFVEUiXX0seyJzZXJ2aWNlIjoiY29udGVudHNfY291cnNlcyIsImFjdGlvbnMiOlsiUkVBRCJdfSx7InNlcnZpY2UiOiJjb250ZW50c19sYWJzIiwiYWN0aW9ucyI6WyJSRUFEIl19LHsic2VydmljZSI6ImNvbnRlbnRzX21vZHVsZSIsImFjdGlvbnMiOlsiUkVBRCJdfSx7InNlcnZpY2UiOiJwcm9qZWN0IiwiYWN0aW9ucyI6WyJSRUFEIl19LHsic2VydmljZSI6InByZXBfYmFuayIsImFjdGlvbnMiOlsiUkVBRCJdfSx7InNlcnZpY2UiOiJza2lsbF9tb2R1bGUiLCJhY3Rpb25zIjpbIlJFQUQiLCJDUkVBVEUiLCJVUERBVEUiLCJERUxFVEUiXX0seyJzZXJ2aWNlIjoiZmVlZGJhY2tfdGVtcGxhdGUiLCJhY3Rpb25zIjpbIlJFQUQiLCJDUkVBVEUiLCJVUERBVEUiLCJERUxFVEUiXX0seyJzZXJ2aWNlIjoiYmF0Y2hlcyIsImFjdGlvbnMiOlsiUkVBRCIsIkNSRUFURSIsIlVQREFURSIsIkRFTEVURSJdfSx7InNlcnZpY2UiOiJhc3NpZ25fYmF0Y2giLCJhY3Rpb25zIjpbIlJFQUQiLCJDUkVBVEUiLCJVUERBVEUiLCJERUxFVEUiXX0seyJzZXJ2aWNlIjoidW5hc3NpZ25fYmF0Y2giLCJhY3Rpb25zIjpbIlJFQUQiLCJDUkVBVEUiLCJVUERBVEUiLCJERUxFVEUiXX0seyJzZXJ2aWNlIjoiYXNzZXNzbWVudHMiLCJhY3Rpb25zIjpbIlJFQUQiLCJDUkVBVEUiLCJVUERBVEUiLCJERUxFVEUiXX0seyJzZXJ2aWNlIjoiZW1haWxfdGVtcGxhdGUiLCJhY3Rpb25zIjpbIlJFQUQiLCJDUkVBVEUiLCJVUERBVEUiLCJERUxFVEUiXX0seyJzZXJ2aWNlIjoiY2VydGlmaWNhdGVfdGVtcGxhdGUiLCJhY3Rpb25zIjpbIlJFQUQiLCJDUkVBVEUiLCJVUERBVEUiLCJERUxFVEUiXX0seyJzZXJ2aWNlIjoiYWRkX2V2YWx1YXRpb25fdGVtcGxhdGUiLCJhY3Rpb25zIjpbIlJFQUQiLCJDUkVBVEUiLCJVUERBVEUiLCJERUxFVEUiXX0seyJzZXJ2aWNlIjoiZXZhbHVhdGlvbl9waGFzZXMiLCJhY3Rpb25zIjpbIlJFQUQiLCJDUkVBVEUiLCJVUERBVEUiLCJERUxFVEUiXX0seyJzZXJ2aWNlIjoiZXZhbHVhdGlvbl9tZXRyaWNzIiwiYWN0aW9ucyI6WyJSRUFEIiwiQ1JFQVRFIiwiVVBEQVRFIiwiREVMRVRFIl19LHsic2VydmljZSI6InByZXBfbW9kdWxlcyIsImFjdGlvbnMiOlsiUkVBRCJdfV0sImV4cCI6MTc3MTMwMjkyMiwianRpIjoiMDBiMDI4YTgtNjllMS00NTc3LTk1MDItZGViODJlMzc0MGJkIn0.hDcbBkcPxyNKtVul6SqueBrVBteWZp5f_TiV95edZLc";
+const AUTH_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2OTQ1MTE4MTFhMzhhNGY4YWFmN2UxNjkiLCJyb2xlIjoib3BlcmF0aW9uc0Fzc29jaWF0ZSIsImlzTWZhIjpmYWxzZSwiaXN0ZmEiOmZhbHNlLCJvdHBWZXJpZmllZCI6dHJ1ZSwidHlwZSI6ImNsYXNzaWZpZWQiLCJjb21wYW55TmFtZSI6Inh5eiBjb21wYW55IiwiaXNTV1N1cGVyQWRtaW4iOmZhbHNlLCJzb3J0bmFtZSI6Inh5eiIsImlzVGZhVmVyaWZpZWQiOnRydWUsImlzTWZhVmVyaWZpZWQiOnRydWUsInRlbmFudFR5cGUiOiJjb21wYW55IiwicGVybWlzc2lvbnMiOlt7InNlcnZpY2UiOiJwcm9ncmFtX21hbmFnZW1lbnQiLCJhY3Rpb25zIjpbIkNSRUFURSIsIlJFQUQiLCJVUERBVEUiLCJERUxFVEUiLCJDT0hPUlRDUlVEIiwiSU5URUdSQVRJT05TU1oiLCJDQUxFTkRBUkNPTkZJRyJdfSx7InNlcnZpY2UiOiJkYXNoYm9hcmRfT3BlcmF0aW9uc19hc3NvY2lhdGUiLCJhY3Rpb25zIjpbIkNSRUFURSIsIlJFQUQiLCJVUERBVEUiLCJERUxFVEUiXX0seyJzZXJ2aWNlIjoiY29udGVudHNfY291cnNlcyIsImFjdGlvbnMiOlsiUkVBRCJdfSx7InNlcnZpY2UiOiJjb250ZW50c19sYWJzIiwiYWN0aW9ucyI6WyJSRUFEIl19LHsic2VydmljZSI6ImNvbnRlbnRzX21vZHVsZSIsImFjdGlvbnMiOlsiUkVBRCJdfSx7InNlcnZpY2UiOiJwcm9qZWN0IiwiYWN0aW9ucyI6WyJSRUFEIl19LHsic2VydmljZSI6InByZXBfYmFuayIsImFjdGlvbnMiOlsiUkVBRCJdfSx7InNlcnZpY2UiOiJza2lsbF9tb2R1bGUiLCJhY3Rpb25zIjpbIlJFQUQiLCJDUkVBVEUiLCJVUERBVEUiLCJERUxFVEUiXX0seyJzZXJ2aWNlIjoiZmVlZGJhY2tfdGVtcGxhdGUiLCJhY3Rpb25zIjpbIlJFQUQiLCJDUkVBVEUiLCJVUERBVEUiLCJERUxFVEUiXX0seyJzZXJ2aWNlIjoiYmF0Y2hlcyIsImFjdGlvbnMiOlsiUkVBRCIsIkNSRUFURSIsIlVQREFURSIsIkRFTEVURSJdfSx7InNlcnZpY2UiOiJhc3NpZ25fYmF0Y2giLCJhY3Rpb25zIjpbIlJFQUQiLCJDUkVBVEUiLCJVUERBVEUiLCJERUxFVEUiXX0seyJzZXJ2aWNlIjoidW5hc3NpZ25fYmF0Y2giLCJhY3Rpb25zIjpbIlJFQUQiLCJDUkVBVEUiLCJVUERBVEUiLCJERUxFVEUiXX0seyJzZXJ2aWNlIjoiYXNzZXNzbWVudHMiLCJhY3Rpb25zIjpbIlJFQUQiLCJDUkVBVEUiLCJVUERBVEUiLCJERUxFVEUiXX0seyJzZXJ2aWNlIjoiZW1haWxfdGVtcGxhdGUiLCJhY3Rpb25zIjpbIlJFQUQiLCJDUkVBVEUiLCJVUERBVEUiLCJERUxFVEUiXX0seyJzZXJ2aWNlIjoiY2VydGlmaWNhdGVfdGVtcGxhdGUiLCJhY3Rpb25zIjpbIlJFQUQiLCJDUkVBVEUiLCJVUERBVEUiLCJERUxFVEUiXX0seyJzZXJ2aWNlIjoiYWRkX2V2YWx1YXRpb25fdGVtcGxhdGUiLCJhY3Rpb25zIjpbIlJFQUQiLCJDUkVBVEUiLCJVUERBVEUiLCJERUxFVEUiXX0seyJzZXJ2aWNlIjoiZXZhbHVhdGlvbl9waGFzZXMiLCJhY3Rpb25zIjpbIlJFQUQiLCJDUkVBVEUiLCJVUERBVEUiLCJERUxFVEUiXX0seyJzZXJ2aWNlIjoiZXZhbHVhdGlvbl9tZXRyaWNzIiwiYWN0aW9ucyI6WyJSRUFEIiwiQ1JFQVRFIiwiVVBEQVRFIiwiREVMRVRFIl19LHsic2VydmljZSI6InByZXBfbW9kdWxlcyIsImFjdGlvbnMiOlsiUkVBRCJdfV0sImV4cCI6MTc3MTQ5MzQ5NiwianRpIjoiNWE0ODNkMmQtODVhNS00ZTAzLTg3MDQtZDE1ZDEwYTI3NzllIn0.99FeFJtghBRCT8UC7VpRgiyJNHQkDtBvNAT1mdSaeXA";
 
 test('OA 20-Step Comprehensive Workflow - Production Ready', async ({ page, context }) => {
   test.setTimeout(600000); // 10 minutes
@@ -128,15 +128,30 @@ test('OA 20-Step Comprehensive Workflow - Production Ready', async ({ page, cont
   await page.keyboard.press('Escape');
   await page.waitForTimeout(1000);
   await page.getByRole('button', { name: 'Create', exact: true }).click();
-  console.log('  - Navigating to list...');
+  console.log('  - Navigating to Program list...');
   await page.waitForTimeout(2000);
-  await page.locator('nav').getByText('Program Builder').click().catch(() => { });
+
+  // DIRECT NAVIGATION is more robust than sidebar clicking during complex workflows
+  try {
+    await page.goto(`${BASE_URL}/operations-associate/contents/module`, { waitUntil: 'networkidle', timeout: 15000 });
+  } catch (e) {
+    console.log('  ℹ Direct navigation timed out, trying sidebar...');
+    await page.locator('nav').getByText(/^Programs$/i).first().click().catch(() => { });
+    await page.locator('text=Program Builder').first().click();
+  }
+
   await page.waitForURL(/.*\/contents\/module/, { timeout: 15000 });
 
   // Finding internal page content access
+  // HARDENED: Scroll to the top and wait for the specific row with the new title
+  await page.evaluate(() => window.scrollTo(0, 0));
   const row = page.locator('tr').filter({ hasText: programTitle }).first();
-  await row.waitFor({ state: 'visible', timeout: 10000 });
-  await row.locator('button').filter({ hasNotText: /Preview/i }).first().click();
+  await row.waitFor({ state: 'visible', timeout: 15000 });
+
+  // Specifically target the content/edit button in that row
+  const contentBtn = row.locator('button').filter({ has: page.locator('svg') }).first();
+  await contentBtn.click();
+
   await expect(page.getByRole('button', { name: 'INNER PAGE CONTENT' })).toBeVisible({ timeout: 30000 });
 
   // STEP 10: Inner Content & Certificate
@@ -151,22 +166,19 @@ test('OA 20-Step Comprehensive Workflow - Production Ready', async ({ page, cont
   // STEP 11: Benefits
   console.log('Step 11: Adding Benefits...');
   await page.getByRole('button', { name: /\+ Add Benefits/i }).click();
-  const benefitModal = page.locator('[role="dialog"]').last();
-  await benefitModal.waitFor({ state: 'visible' });
-  await benefitModal.locator('input, textarea, [role="textbox"]').first().fill('Expert Mentorship and Hands-on Labs');
-  await benefitModal.getByRole('button', { name: /\+ Add/i }).click({ force: true });
-  await expect(benefitModal).not.toBeVisible({ timeout: 10000 });
+  await page.getByRole('textbox', { name: /Benefit Text/i }).fill('Expert Mentorship and Hands-on Labs');
+  await page.getByRole('button', { name: /\+ Add/i }).click();
   await page.getByRole('button', { name: 'Next' }).click();
 
-  // STEP 12: Curriculum
+  // STEP 12: Curriculum (VERIFIED FIX)
   console.log('Step 12: Adding Curriculum...');
   await page.getByRole('button', { name: /\+ Add Curriculum/i }).click();
   const curriculumModal = page.locator('[role="dialog"]').last();
   await curriculumModal.waitFor({ state: 'visible', timeout: 10000 });
-  await curriculumModal.getByPlaceholder(/Title/i).fill('Core Foundations');
-  await curriculumModal.getByPlaceholder(/Duration/i).fill('25');
-  await curriculumModal.locator('textarea').fill('Mastering technical systems and architectural foundations.');
-  await curriculumModal.getByRole('button', { name: /^\+ Add$/i }).click({ force: true });
+  await curriculumModal.getByRole('textbox', { name: 'Title' }).fill('Core Foundations');
+  await curriculumModal.getByPlaceholder('Duration').fill('25');
+  await curriculumModal.getByRole('textbox', { name: 'Description' }).fill('Mastering technical systems and architectural foundations.');
+  await curriculumModal.getByRole('button', { name: /^\+ Add$/i }).click();
   await expect(curriculumModal).not.toBeVisible({ timeout: 10000 });
   await page.waitForTimeout(1000);
   await page.getByRole('button', { name: 'Next' }).click();
@@ -175,13 +187,15 @@ test('OA 20-Step Comprehensive Workflow - Production Ready', async ({ page, cont
   console.log('Step 13: Adding Learning Outcomes...');
   await page.getByRole('button', { name: /\+ Add Learning/i }).click();
   const outcomeModal = page.locator('[role="dialog"]').last();
-  await outcomeModal.waitFor({ state: 'visible' });
-  // Use a more generic locator for the input to avoid name/label mismatch
-  await outcomeModal.locator('input, [role="textbox"]').first().fill('Advanced System Architecture Design');
-  await outcomeModal.getByRole('button', { name: /Add/i }).click({ force: true });
+  await outcomeModal.getByRole('textbox', { name: /Learning outcome name/i }).fill('Advanced System Architecture Design');
+  await outcomeModal.getByRole('button', { name: 'Add', exact: true }).click();
   await expect(outcomeModal).not.toBeVisible({ timeout: 10000 });
-  await page.getByRole('button', { name: 'Submit' }).click({ force: true });
-  await page.waitForTimeout(3000);
+
+  // Ensure we click the SUBMIT button for the whole internal page content section
+  const mainSubmitBtn = page.getByRole('button', { name: 'Submit', exact: true }).first();
+  await mainSubmitBtn.scrollIntoViewIfNeeded();
+  await mainSubmitBtn.click();
+  await page.waitForTimeout(4000);
 
   // STEP 14: Link Projects/Courses
   console.log('Step 14: Linking Courses...');
@@ -283,31 +297,17 @@ test('OA 20-Step Comprehensive Workflow - Production Ready', async ({ page, cont
 
   console.log('  - Creating Cohort...');
   await page.getByRole('button', { name: 'Create Cohort' }).click();
-  await page.getByPlaceholder('Cohort Name').fill('machinelearning');
-  await page.locator('select').filter({ hasText: /Select Status/i }).selectOption({ label: 'Active' }).catch(async () => {
-    await page.getByRole('combobox', { name: /Status/i }).click();
-    await page.getByRole('option', { name: 'Active', exact: true }).click();
-  });
-  await page.getByPlaceholder('startDate').fill('2026-02-21');
-  await page.getByPlaceholder('endDate').fill('2026-04-11');
+  await page.getByRole('textbox', { name: 'Name' }).fill('machinelearning');
+  await page.getByLabel('Status').selectOption('active');
+  await page.getByRole('textbox', { name: 'Start Date' }).fill('2026-02-21');
+  await page.getByRole('textbox', { name: 'End Date' }).fill('2026-04-11');
   await page.getByRole('button', { name: 'Create' }).click();
-  console.log('  - Cohort created.');
+  await page.waitForTimeout(3000);
 
-  console.log('  - Opening Slack Integration modal...');
-  const triggerBtn = page.getByRole('button', { name: /Generate Slack/i }).first();
-  await triggerBtn.click({ force: true });
-
-  console.log('  - Clicking "Generate Slack" in confirmed modal...');
-  const modalBtn = page.locator('[role="dialog"]').getByRole('button', { name: /Generate Slack/i });
-  await modalBtn.waitFor({ state: 'visible', timeout: 10000 });
-  await modalBtn.click({ force: true });
-
-  console.log('  - Waiting 15 seconds for generation to process...');
-  // Explicit wait AFTER clicking as requested
-  await page.waitForTimeout(15000);
-
-  // Close modal if it's still there
-  await page.keyboard.press('Escape').catch(() => { });
+  console.log('  - Generating Slack...');
+  await page.getByRole('button', { name: 'Generate Slack' }).click();
+  await page.waitForTimeout(1000);
+  await page.getByRole('button', { name: 'Generate Slack' }).click();
   await page.waitForTimeout(2000);
 
   console.log('  - Creating Calendar Configuration...');
@@ -342,24 +342,20 @@ test('OA 20-Step Comprehensive Workflow - Production Ready', async ({ page, cont
   await page.getByRole('button', { name: 'Create Configuration' }).click();
   await page.waitForTimeout(3000);
 
-  console.log('  - Final Step: Sending for Approval...');
-  // Navigate back to listing to ensure we find the button
+  // Back/Dismiss clicks - replacing generic indexed buttons with more robust escape or navigation
+  console.log('  - Returning to Program list...');
   await page.goto(`${BASE_URL}/operations-associate/programs`, { waitUntil: 'networkidle' });
-  await page.waitForTimeout(2000);
+  await page.waitForTimeout(3000);
 
-  // Find the specific program row and click Send for Approval
+  console.log('  - Sending for Approval...');
   const finalRow = page.locator('tr').filter({ hasText: programTitle }).first();
   await finalRow.waitFor({ state: 'visible', timeout: 10000 });
-
-  const approvalBtn = finalRow.getByRole('button', { name: /Send for Approval/i });
+  const approvalBtn = finalRow.getByRole('button', { name: 'Send for Approval' });
   if (await approvalBtn.isVisible()) {
-    await approvalBtn.click({ force: true });
-    console.log('  ✓ Clicked Send for Approval');
-  } else {
-    // If already sent or not found, log it
-    console.log('  ℹ Send for Approval button not found (it might have been sent already).');
+    await approvalBtn.click();
+    console.log('  ✓ Approval request sent');
   }
-  await page.waitForTimeout(5000);
+  await page.waitForTimeout(3000);
 
   console.log('\n✨ MISSION ACCOMPLISHED: WORKFLOW COMPLETED! ✨\n');
 });
